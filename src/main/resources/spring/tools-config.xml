@@ -37,10 +37,12 @@
     <!-- Enables scanning for @Cacheable annotation -->
     <cache:annotation-driven/>
 
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
-        p:cacheManager-ref="ehcache"/>
-
-    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
-        p:configLocation="classpath:cache/ehcache.xml"/>
+    <!-- JCache (JSR-107) cache manager using Ehcache 3.x as the provider -->
+    <bean id="cacheManager" class="org.springframework.cache.jcache.JCacheCacheManager">
+        <property name="cacheManager">
+            <bean class="org.springframework.cache.jcache.JCacheManagerFactoryBean"
+                  p:cacheManagerUri="classpath:cache/ehcache3.xml"/>
+        </property>
+    </bean>
 
 </beans>
