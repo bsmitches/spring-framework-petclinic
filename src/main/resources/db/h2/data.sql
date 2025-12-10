@@ -51,3 +51,11 @@ INSERT INTO visits VALUES (1, 7, '2013-01-01', 'rabies shot');
 INSERT INTO visits VALUES (2, 8, '2013-01-02', 'rabies shot');
 INSERT INTO visits VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits VALUES (4, 7, '2013-01-04', 'spayed');
+
+-- Reset identity columns to avoid conflicts with new inserts (H2 2.x compatibility)
+ALTER TABLE vets ALTER COLUMN id RESTART WITH 100;
+ALTER TABLE specialties ALTER COLUMN id RESTART WITH 100;
+ALTER TABLE types ALTER COLUMN id RESTART WITH 100;
+ALTER TABLE owners ALTER COLUMN id RESTART WITH 100;
+ALTER TABLE pets ALTER COLUMN id RESTART WITH 100;
+ALTER TABLE visits ALTER COLUMN id RESTART WITH 100;
